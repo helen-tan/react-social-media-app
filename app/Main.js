@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client"
 import Header from "./components/Header"
 import HomeGuest from "./components/HomeGuest"
 import Footer from "./components/Footer"
+import About from "./components/About"
 
 function Main() {
   return (

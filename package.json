@@ -1,7 +1,6 @@
 {
   "name": "react-social-media-app",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "webpack serve",
@@ -12,7 +11,7 @@
     "url": "git+https://github.com/helen-tan/react-social-media-app.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Helen Tan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/helen-tan/react-social-media-app/issues"
@@ -28,5 +27,6 @@
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.1"
-  }
+  },
+  "description": ""
 }

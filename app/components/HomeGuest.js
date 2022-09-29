@@ -1,11 +1,22 @@
-import React from "react";
-import Page from "./util/Page";
+import React from "react"
+import Page from "./util/Page"
+import Axios from 'axios'
 
 const HomeGuest = () => {
   // Handle Form submit
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Hey');
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      await Axios.post('http://localhost:8080/register', {
+        username: "test5",
+        email: "rjs@email.com",
+        password: "qwerty1234567"
+      })
+      // don't want to show this msg until req is done, hence await is used
+      console.log("User was successfully created.")
+    } catch(e) {
+      console.log("There was an error.")
+    }
   }
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Axios } from "axios";
+import Axios from "axios";
 
 const HeaderLoggedOut = () => {
   const [username, setUsername] = useState()

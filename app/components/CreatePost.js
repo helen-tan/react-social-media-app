@@ -9,7 +9,7 @@ function CreatePost(props) {
   const [body, setBody] = useState()
 
   const navigate = useNavigate()
-  const addFlashMessage = useContext(ExampleContext)
+  const { addFlashMessage } = useContext(ExampleContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault()

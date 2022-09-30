@@ -24,10 +24,10 @@ function Main() {
   }
 
   return (
-    <ExampleContext.Provider value={addFlashMessage}>
+    <ExampleContext.Provider value={{addFlashMessage, setLoggedIn}}>
       <Router>
         <FlashMessages messages={flashMessages}/>
-        <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+        <Header loggedIn={loggedIn} />
 
         <Routes>
           <Route path='/' element={loggedIn ? <Home/> : <HomeGuest/>} />

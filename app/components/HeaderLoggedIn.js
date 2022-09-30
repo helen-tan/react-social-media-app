@@ -1,6 +1,6 @@
 import React from 'react'
 
-const HeaderLoggedIn = () => {
+const HeaderLoggedIn = (props) => {
   return (
     <div class="flex-row my-3 my-md-0">
       <a href="#" class="text-white mr-2 header-search-icon">
@@ -16,7 +16,7 @@ const HeaderLoggedIn = () => {
       <a class="btn btn-sm btn-success mr-2" href="/create-post">
         Create Post
       </a>
-      <button class="btn btn-sm btn-secondary">
+      <button onClick={() => props.setLoggedIn(false)} class="btn btn-sm btn-secondary">
         Sign Out
       </button>
     </div>

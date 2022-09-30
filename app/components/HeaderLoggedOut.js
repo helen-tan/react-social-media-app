@@ -8,7 +8,7 @@ const HeaderLoggedOut = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await Axios.post('http://localhost:8080/login', {username, password})
+      const response = await Axios.post('/login', {username, password})
       //console.log(response.data)
       if (response.data) {
         // Save the returned values to localStorage - make browser rmb we are logged in

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useReducer } from "react"
 import ReactDOM from "react-dom/client"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Axios from 'axios'
@@ -14,8 +14,38 @@ import CreatePost from "./components/CreatePost"
 import ViewSinglePost from "./components/ViewSinglePost"
 import FlashMessages from "./components/shared/FlashMessages"
 import ExampleContext from "./ExampleContext"
+import { transformIncludesAndExcludes } from "@babel/preset-env"
 
 function Main() {
+  // In reducers, instead of multiple useStates, this will store the global states
+  const initialState = {
+    loggedIn: Boolean(localStorage.getItem("appToken")),
+    flashMessages: []
+  }
+
+  // note: in React, we don't mutate/modify state. Instead, we must create a new object based on the previous values
+  const ourReducer = (state, action) => {
+    switch (action.type) {
+      case "login":
+        return ({
+          loggedIn : true,
+          flashMessages: state.flashMessages
+        })
+      case "logout":
+        return ({
+          loggedIn : false,
+          flashMessages: state.flashMessages
+        })
+      case "flashMessage":
+        return ({
+          loggedIn : state.loggedIn,
+          flashMessages: state.flashMessages.concat(action.value)
+        })
+    }
+  }
+
+  const [state, dispatch] = useReducer(ourReducer, initialState)
+
   const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("appToken")));
   const [flashMessages, setFlashMessages] = useState([])
 

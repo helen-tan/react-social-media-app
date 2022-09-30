@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
 
-const HeaderLoggedOut = () => {
+const HeaderLoggedOut = (props) => {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
 
@@ -12,6 +12,7 @@ const HeaderLoggedOut = () => {
       //console.log(response.data)
       if (response.data) {
         console.log(response.data)
+        props.setLoggedIn(true) // will be passed to parent component Header.js
       } else {
         console.log("Incorrect username or password.")
       }

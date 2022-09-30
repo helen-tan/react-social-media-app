@@ -11,7 +11,10 @@ const HeaderLoggedOut = (props) => {
       const response = await Axios.post('http://localhost:8080/login', {username, password})
       //console.log(response.data)
       if (response.data) {
-        console.log(response.data)
+        // Save the returned values to localStorage - make browser rmb we are logged in
+        localStorage.setItem("appToken", response.data.token)
+        localStorage.setItem("appUsername", response.data.username)
+        localStorage.setItem("appAvatar", response.data.avatar)
         props.setLoggedIn(true) // will be passed to parent component Header.js
       } else {
         console.log("Incorrect username or password.")

@@ -13,6 +13,7 @@ import Home from "./components/Home"
 import CreatePost from "./components/CreatePost"
 import ViewSinglePost from "./components/ViewSinglePost"
 import FlashMessages from "./components/shared/FlashMessages"
+import ExampleContext from "./ExampleContext"
 
 function Main() {
   const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("appToken")));
@@ -23,20 +24,22 @@ function Main() {
   }
 
   return (
-    <Router>
-      <FlashMessages messages={flashMessages}/>
-      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+    <ExampleContext.Provider value={addFlashMessage}>
+      <Router>
+        <FlashMessages messages={flashMessages}/>
+        <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
 
-      <Routes>
-        <Route path='/' element={loggedIn ? <Home/> : <HomeGuest/>} />
-        <Route path='/about-us' element={<About/>} />
-        <Route path='/terms' element={<Terms/>} />
-        <Route path='/create-post' element={<CreatePost addFlashMessage={addFlashMessage}/>} />
-        <Route path='/post/:id' element={<ViewSinglePost/>} />
-      </Routes>
+        <Routes>
+          <Route path='/' element={loggedIn ? <Home/> : <HomeGuest/>} />
+          <Route path='/about-us' element={<About/>} />
+          <Route path='/terms' element={<Terms/>} />
+          <Route path='/create-post' element={<CreatePost />} />
+          <Route path='/post/:id' element={<ViewSinglePost/>} />
+        </Routes>
 
-      <Footer />
-    </Router>
+        <Footer />
+      </Router>
+    </ExampleContext.Provider>
   );
 }
 

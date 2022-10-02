@@ -4,6 +4,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Axios from 'axios'
 Axios.defaults.baseURL = 'http://localhost:8080'
 
+import StateContext from './StateContext'
+import DispatchContext from "./DispatchContext"
+
+// Components
 import Header from "./components/Header"
 import HomeGuest from "./components/HomeGuest"
 import Footer from "./components/Footer"
@@ -13,8 +17,6 @@ import Home from "./components/Home"
 import CreatePost from "./components/CreatePost"
 import ViewSinglePost from "./components/ViewSinglePost"
 import FlashMessages from "./components/shared/FlashMessages"
-import ExampleContext from "./ExampleContext"
-import { transformIncludesAndExcludes } from "@babel/preset-env"
 
 function Main() {
   // In reducers, instead of multiple useStates, this will store the global states
@@ -46,15 +48,13 @@ function Main() {
 
   const [state, dispatch] = useReducer(ourReducer, initialState)
 
-  const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("appToken")));
-  const [flashMessages, setFlashMessages] = useState([])
 
-  const addFlashMessage = (msg) => {
-    setFlashMessages(prev => prev.concat(msg))
-  }
+
+
 
   return (
-    <ExampleContext.Provider value={{addFlashMessage, setLoggedIn}}>
+   <StateContext.Provider value={state}>
+    <DispatchContext.Provider value={dispatch}>
       <Router>
         <FlashMessages messages={flashMessages}/>
         <Header loggedIn={loggedIn} />
@@ -69,7 +69,9 @@ function Main() {
 
         <Footer />
       </Router>
-    </ExampleContext.Provider>
+    </DispatchContext.Provider>
+   </StateContext.Provider>
+
   );
 }
 

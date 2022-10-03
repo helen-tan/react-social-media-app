@@ -19,7 +19,7 @@ const HeaderLoggedOut = (props) => {
         localStorage.setItem("appUsername", response.data.username)
         localStorage.setItem("appAvatar", response.data.avatar)
 
-        appDispatch.setLoggedIn({ type: "login" })
+        appDispatch({ type: "login" })
       } else {
         console.log("Incorrect username or password.")
       }

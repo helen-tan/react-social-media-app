@@ -6,7 +6,7 @@ const HeaderLoggedIn = (props) => {
   const appDispatch = useContext(DispatchContext)
 
   const handleLogout = () => {
-    appDispatch.setLoggedIn({ type: "logout" })
+    appDispatch({ type: "logout" })
     // Remove the properties from localStorage
     localStorage.removeItem("appToken")
     localStorage.removeItem("appUsername")

@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import ExampleContext from '../ExampleContext'
+import DispatchContext from '../DispatchContext'
 
 const HeaderLoggedIn = (props) => {
-  const { setLoggedIn } = useContext(ExampleContext)
+  const appDispatch = useContext(DispatchContext)
 
   const handleLogout = () => {
-    setLoggedIn(false) // Will send value to parent compon Header.js
+    appDispatch.setLoggedIn({ type: "logout" })
     // Remove the properties from localStorage
     localStorage.removeItem("appToken")
     localStorage.removeItem("appUsername")

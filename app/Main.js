@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Axios from 'axios'
 Axios.defaults.baseURL = 'http://localhost:8080'
 
+// Contexts
 import StateContext from './StateContext'
 import DispatchContext from "./DispatchContext"
 
@@ -48,19 +49,19 @@ function Main() {
 
   const [state, dispatch] = useReducer(ourReducer, initialState)
 
-
-
-
-
+  // There is 1 context provider for state and 1 contect provider for dispatch
+  // This way, each indiv component can decide which context they wan to consume and watch for changes,
+  // instead of passing both state & dispatch to 1 context provider and having to re-render when smth they don't need changes
+  // e.g. some components only need access to dispatch, but we don't want them to unnecessarily re-render when the global state changes
   return (
    <StateContext.Provider value={state}>
     <DispatchContext.Provider value={dispatch}>
       <Router>
-        <FlashMessages messages={flashMessages}/>
-        <Header loggedIn={loggedIn} />
+        <FlashMessages messages={state.flashMessages}/>
+        <Header/>
 
         <Routes>
-          <Route path='/' element={loggedIn ? <Home/> : <HomeGuest/>} />
+          <Route path='/' element={state.loggedIn ? <Home/> : <HomeGuest/>} />
           <Route path='/about-us' element={<About/>} />
           <Route path='/terms' element={<Terms/>} />
           <Route path='/create-post' element={<CreatePost />} />

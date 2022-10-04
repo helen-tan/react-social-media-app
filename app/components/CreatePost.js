@@ -21,7 +21,7 @@ function CreatePost(props) {
         token: localStorage.getItem("appToken")
       })
       console.log("A new post was created.")
-      appDispatch({ type: "flashMessage" }, "You successfully created a post!")
+      appDispatch({ type: "flashMessage" , value: "You successfully created a post!"})
 
       // Redirect to new post url
       navigate(`/post/${response.data}`)

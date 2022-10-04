@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from "react"
 import ReactDOM from "react-dom/client"
+import { useImmerReducer } from 'use-immer'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Axios from 'axios'
 Axios.defaults.baseURL = 'http://localhost:8080'
@@ -27,27 +28,21 @@ function Main() {
   }
 
   // note: in React, we don't mutate/modify state. Instead, we must create a new object based on the previous values
-  const ourReducer = (state, action) => {
+  const ourReducer = (draft, action) => {
     switch (action.type) {
       case "login":
-        return ({
-          loggedIn : true,
-          flashMessages: state.flashMessages
-        })
+        draft.loggedIn = true
+        return
       case "logout":
-        return ({
-          loggedIn : false,
-          flashMessages: state.flashMessages
-        })
+        draft.loggedIn = false
+        return
       case "flashMessage":
-        return ({
-          loggedIn : state.loggedIn,
-          flashMessages: state.flashMessages.concat(action.value)
-        })
+        draft.flashMessages.push(action.value)
+        return
     }
   }
 
-  const [state, dispatch] = useReducer(ourReducer, initialState)
+  const [state, dispatch] = useImmerReducer(ourReducer, initialState)
 
   // There is 1 context provider for state and 1 contect provider for dispatch
   // This way, each indiv component can decide which context they wan to consume and watch for changes,
